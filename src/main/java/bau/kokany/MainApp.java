@@ -21,7 +21,7 @@ public class MainApp extends Application {
         stage.setTitle("Kókány BAU");
         stage.setScene(scene);
         stage.show();
-        //valami 2
+        
     }
 
     public static void main(String[] args) throws SQLException {
