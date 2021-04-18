@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 public class FXMLController implements Initializable {
@@ -61,8 +62,18 @@ public class FXMLController implements Initializable {
     private TextField professionText;
 
     @FXML
-    private TableView<String> lista = new TableView<>();
+    private TableView<Expert> lista;
 
+    @FXML
+    private TableColumn<Expert, String> lista_name;
+
+    @FXML
+    private TableColumn<Expert, String> lista_proffession;
+
+    @FXML
+    private TableColumn<Expert, String> lista_status;
+
+    ObservableList<Expert> row = FXCollections.observableArrayList();
 
     @FXML
     private Button ListExpertButton;
@@ -99,17 +110,15 @@ public class FXMLController implements Initializable {
 
     @FXML
     void ListExpertButtonPushed(ActionEvent event) throws Exception {
-        /*ObservableList<String> row = FXCollections.observableArrayList();
+
         try(ExpertDAO eDAO = new JPAExpertDAO();) {
             List<Expert> expertList = eDAO.getExperts();
             for(Expert e : expertList) {
-                row.add(e.getName());
-                row.add(e.getProfession());
-                row.add(e.getStatus().toString());
+                if(row.size() < expertList.size()) {
+                    row.add(e);
+                }
             }
-            System.out.println(row);
-            lista.setItems(row);
-        }*/
+        }
     }
 
     @FXML
@@ -134,5 +143,10 @@ public class FXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         StatusCheckBox.getItems().add(StatusType.ELFOGLALT);
         StatusCheckBox.getItems().add(StatusType.SZABAD);
+
+        lista_name.setCellValueFactory(new PropertyValueFactory<Expert, String>("name"));
+        lista_proffession.setCellValueFactory(new PropertyValueFactory<Expert, String>("profession"));
+        lista_status.setCellValueFactory(new PropertyValueFactory<Expert, String>("status"));
+        lista.setItems(row);
     }
 }
