@@ -12,8 +12,6 @@ import org.h2.tools.Server;
 
 public class MainApp extends Application {
 
-    /* komment */
-
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/Scene.fxml"));

@@ -82,9 +82,6 @@ public class FXMLController implements Initializable {
     void expertbuttonPushed(ActionEvent event) {
         main_page.setVisible(false);
         expert_page.setVisible(true);
-
-        StatusCheckBox.getItems().add(StatusType.ELFOGLALT);
-        StatusCheckBox.getItems().add(StatusType.SZABAD);
     }
 
     @FXML
@@ -135,6 +132,7 @@ public class FXMLController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        StatusCheckBox.getItems().add(StatusType.ELFOGLALT);
+        StatusCheckBox.getItems().add(StatusType.SZABAD);
     }
 }
