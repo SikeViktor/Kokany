@@ -99,7 +99,7 @@ public class FXMLController implements Initializable {
 
     @FXML
     void ListExpertButtonPushed(ActionEvent event) throws Exception {
-        ObservableList<String> row = FXCollections.observableArrayList();
+        /*ObservableList<String> row = FXCollections.observableArrayList();
         try(ExpertDAO eDAO = new JPAExpertDAO();) {
             List<Expert> expertList = eDAO.getExperts();
             for(Expert e : expertList) {
@@ -109,7 +109,7 @@ public class FXMLController implements Initializable {
             }
             System.out.println(row);
             lista.setItems(row);
-        }
+        }*/
     }
 
     @FXML
