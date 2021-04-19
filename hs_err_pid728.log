@@ -1,0 +1,234 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 67108864 bytes for G1 virtual space
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Unscaled Compressed Oops mode in which the Java heap is
+#     placed in the first 4GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 4GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (./open/src/hotspot/os/windows/os_windows.cpp:3472), pid=728, tid=6084
+#
+# JRE version:  (15.0.1+9) (build )
+# Java VM: OpenJDK 64-Bit Server VM (15.0.1+9-18, mixed mode, sharing, tiered, compressed oops, g1 gc, windows-amd64)
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: --module-path=C:/Program Files/Java/javafx-sdk-11.0.2/lib --add-modules=javafx.controls,javafx.fxml --add-modules=javafx.base,javafx.graphics --add-reads=javafx.base=ALL-UNNAMED --add-reads=javafx.graphics=ALL-UNNAMED -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA 2020.1.4\lib\idea_rt.jar=53789:C:\Program Files\JetBrains\IntelliJ IDEA 2020.1.4\bin -Dfile.encoding=UTF-8 bau.kokany.MainApp
+
+Host: AMD Athlon(tm) 64 X2 Dual Core Processor 6000+, 2 cores, 3G,  Windows 7 , 64 bit Build 7601 (6.1.7601.18847)
+Time: Mon Apr 19 18:20:07 2021 Közép-európai nyári ido  elapsed time: 0.212827 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00000000003f81f0):  JavaThread "Unknown thread" [_thread_in_vm, id=6084, stack(0x00000000021f0000,0x00000000022f0000)]
+
+Stack: [0x00000000021f0000,0x00000000022f0000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x62ae9a]
+V  [jvm.dll+0x781389]
+V  [jvm.dll+0x782ae3]
+V  [jvm.dll+0x783143]
+V  [jvm.dll+0x216265]
+V  [jvm.dll+0x6281d9]
+V  [jvm.dll+0x61cd15]
+V  [jvm.dll+0x2d01fd]
+V  [jvm.dll+0x2d0062]
+V  [jvm.dll+0x2d603c]
+V  [jvm.dll+0x325b2a]
+V  [jvm.dll+0x3251f4]
+V  [jvm.dll+0x2a717a]
+V  [jvm.dll+0x2a8318]
+V  [jvm.dll+0x75e101]
+V  [jvm.dll+0x3343e4]
+V  [jvm.dll+0x73e826]
+V  [jvm.dll+0x3b7777]
+V  [jvm.dll+0x3b9201]
+C  [jli.dll+0x52fb]
+C  [ucrtbase.DLL+0x1d912]
+C  [kernel32.dll+0x159cd]
+C  [ntdll.dll+0x2c541]
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x000007feefdd4ff0, length=0, elements={
+}
+
+Java Threads: ( => current thread )
+
+Other Threads:
+  0x0000000000426030 GCTaskThread "GC Thread#0" [stack: 0x000000001c270000,0x000000001c370000] [id=1828]
+  0x0000000000433a10 ConcurrentGCThread "G1 Main Marker" [stack: 0x000000001c550000,0x000000001c650000] [id=3684]
+  0x0000000000434590 ConcurrentGCThread "G1 Conc#0" [stack: 0x000000001c710000,0x000000001c810000] [id=4744]
+
+[error occurred during error reporting (printing all threads), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x000007feef5c8047]
+
+VM state: not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x00000000003f2e30] Heap_lock - owner thread: 0x00000000003f81f0
+
+Heap address: 0x00000000c0000000, size: 1024 MB, Compressed Oops mode: 32-bit
+CDS archive(s) mapped at: [0x0000000000000000-0x0000000000000000-0x0000000000000000), size 0, SharedBaseAddress: 0x0000000800000000, ArchiveRelocationMode: 0.
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 0, Narrow klass range: 0x0
+
+Heap:
+ garbage-first heap   total 65536K, used 0K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 0 young (0K), 0 survivors (0K)
+ Metaspace       used 0K, capacity 0K, committed 0K, reserved 0K
+  class space    used 0K, capacity 0K, committed 0K, reserved 0K
+
+Heap Regions: E=young(eden), S=young(survivor), O=old, HS=humongous(starts), HC=humongous(continues), CS=collection set, F=free, OA=open archive, CA=closed archive, TAMS=top-at-mark-start (previous, next)
+
+Card table byte_map: [0x0000000019e60000,0x000000001a060000] _byte_map_base: 0x0000000019860000
+
+Marking Bits (Prev, Next): (CMBitMap*) 0x000000000042a7b0, (CMBitMap*) 0x000000000042a7f0
+ Prev Bits: [0x000000001a260000, 0x000000001b260000)
+ Next Bits: [0x000000001b260000, 0x000000001c260000)
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (1 events):
+Event: 0.143 Loaded shared library C:\Users\Vityu\.jdks\openjdk-15.0.1\bin\java.dll
+
+
+Dynamic libraries:
+0x000000013f0e0000 - 0x000000013f0ed000 	C:\Users\Vityu\.jdks\openjdk-15.0.1\bin\java.exe
+0x0000000077a00000 - 0x0000000077ba9000 	C:\Windows\SYSTEM32\ntdll.dll
+0x00000000778e0000 - 0x00000000779ff000 	C:\Windows\system32\kernel32.dll
+0x000007fefdcb0000 - 0x000007fefdd1c000 	C:\Windows\system32\KERNELBASE.dll
+0x000007fef01b0000 - 0x000007fef01c8000 	C:\Users\Vityu\.jdks\openjdk-15.0.1\bin\jli.dll
+0x000007fefc030000 - 0x000007fefc224000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7601.17514_none_fa396087175ac9ac\COMCTL32.dll
+0x000007feff9f0000 - 0x000007feffa8f000 	C:\Windows\system32\msvcrt.dll
+0x000007fefeaa0000 - 0x000007fefeb07000 	C:\Windows\system32\GDI32.dll
+0x00000000777e0000 - 0x00000000778da000 	C:\Windows\system32\USER32.dll
+0x000007fefdfb0000 - 0x000007fefdfbe000 	C:\Windows\system32\LPK.dll
+0x000007fefe2b0000 - 0x000007fefe379000 	C:\Windows\system32\USP10.dll
+0x000007fefe9d0000 - 0x000007fefea41000 	C:\Windows\system32\SHLWAPI.dll
+0x000007fef01d0000 - 0x000007fef01e9000 	C:\Users\Vityu\.jdks\openjdk-15.0.1\bin\VCRUNTIME140.dll
+0x000007fef0190000 - 0x000007fef0194000 	C:\Users\Vityu\.jdks\openjdk-15.0.1\bin\api-ms-win-crt-runtime-l1-1-0.dll
+0x000007fef0090000 - 0x000007fef018a000 	C:\Users\Vityu\.jdks\openjdk-15.0.1\bin\ucrtbase.DLL
+0x000007fef01a0000 - 0x000007fef01a3000 	C:\Users\Vityu\.jdks\openjdk-15.0.1\bin\api-ms-win-core-localization-l1-2-0.dll
+0x000007fef0070000 - 0x000007fef0073000 	C:\Users\Vityu\.jdks\openjdk-15.0.1\bin\api-ms-win-core-processthreads-l1-1-1.dll
+0x000007fef0080000 - 0x000007fef0083000 	C:\Users\Vityu\.jdks\openjdk-15.0.1\bin\api-ms-win-core-file-l1-2-0.dll
+0x000007fef0050000 - 0x000007fef0053000 	C:\Users\Vityu\.jdks\openjdk-15.0.1\bin\api-ms-win-core-timezone-l1-1-0.dll
+0x000007fef0060000 - 0x000007fef0063000 	C:\Users\Vityu\.jdks\openjdk-15.0.1\bin\api-ms-win-core-file-l2-1-0.dll
+0x000007fef0030000 - 0x000007fef0033000 	C:\Users\Vityu\.jdks\openjdk-15.0.1\bin\api-ms-win-core-synch-l1-2-0.dll
+0x000007fef0040000 - 0x000007fef0043000 	C:\Users\Vityu\.jdks\openjdk-15.0.1\bin\api-ms-win-crt-heap-l1-1-0.dll
+0x000007fef0010000 - 0x000007fef0014000 	C:\Users\Vityu\.jdks\openjdk-15.0.1\bin\api-ms-win-crt-string-l1-1-0.dll
+0x000007fef0020000 - 0x000007fef0024000 	C:\Users\Vityu\.jdks\openjdk-15.0.1\bin\api-ms-win-crt-stdio-l1-1-0.dll
+0x000007feefff0000 - 0x000007feefff4000 	C:\Users\Vityu\.jdks\openjdk-15.0.1\bin\api-ms-win-crt-convert-l1-1-0.dll
+0x000007fef0000000 - 0x000007fef0003000 	C:\Users\Vityu\.jdks\openjdk-15.0.1\bin\api-ms-win-crt-environment-l1-1-0.dll
+0x000007feeffd0000 - 0x000007feeffd3000 	C:\Users\Vityu\.jdks\openjdk-15.0.1\bin\api-ms-win-crt-filesystem-l1-1-0.dll
+0x000007feeffe0000 - 0x000007feeffe5000 	C:\Users\Vityu\.jdks\openjdk-15.0.1\bin\api-ms-win-crt-math-l1-1-0.dll
+0x000007feeffb0000 - 0x000007feeffb3000 	C:\Users\Vityu\.jdks\openjdk-15.0.1\bin\api-ms-win-crt-locale-l1-1-0.dll
+0x000007fefdd20000 - 0x000007fefdd4e000 	C:\Windows\system32\IMM32.DLL
+0x000007fefe440000 - 0x000007fefe549000 	C:\Windows\system32\MSCTF.dll
+0x000007feeffc0000 - 0x000007feeffcc000 	C:\Users\Vityu\.jdks\openjdk-15.0.1\bin\vcruntime140_1.dll
+0x000007feefe70000 - 0x000007feeff01000 	C:\Users\Vityu\.jdks\openjdk-15.0.1\bin\msvcp140.dll
+0x000007feeffa0000 - 0x000007feeffa3000 	C:\Users\Vityu\.jdks\openjdk-15.0.1\bin\api-ms-win-crt-time-l1-1-0.dll
+0x000007feeff90000 - 0x000007feeff93000 	C:\Users\Vityu\.jdks\openjdk-15.0.1\bin\api-ms-win-crt-utility-l1-1-0.dll
+0x000007feef310000 - 0x000007feefe6e000 	C:\Users\Vityu\.jdks\openjdk-15.0.1\bin\server\jvm.dll
+0x000007fefdfc0000 - 0x000007fefe09b000 	C:\Windows\system32\ADVAPI32.dll
+0x000007fefe380000 - 0x000007fefe39f000 	C:\Windows\SYSTEM32\sechost.dll
+0x000007fefe680000 - 0x000007fefe7ad000 	C:\Windows\system32\RPCRT4.dll
+0x000007fefc9f0000 - 0x000007fefc9f9000 	C:\Windows\system32\WSOCK32.dll
+0x000007fefea50000 - 0x000007fefea9d000 	C:\Windows\system32\WS2_32.dll
+0x000007feff9e0000 - 0x000007feff9e8000 	C:\Windows\system32\NSI.dll
+0x000007fef9e40000 - 0x000007fef9e7b000 	C:\Windows\system32\WINMM.dll
+0x000007fefcab0000 - 0x000007fefcabc000 	C:\Windows\system32\VERSION.dll
+0x0000000077bc0000 - 0x0000000077bc7000 	C:\Windows\system32\PSAPI.DLL
+0x000007feeff80000 - 0x000007feeff8a000 	C:\Users\Vityu\.jdks\openjdk-15.0.1\bin\jimage.dll
+0x000007fefc520000 - 0x000007fefc645000 	C:\Windows\system32\DBGHELP.DLL
+0x000007fefc9a0000 - 0x000007fefc9ae000 	C:\Users\Vityu\.jdks\openjdk-15.0.1\bin\instrument.dll
+0x000007feeff50000 - 0x000007feeff75000 	C:\Users\Vityu\.jdks\openjdk-15.0.1\bin\java.dll
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Users\Vityu\.jdks\openjdk-15.0.1\bin;C:\Windows\SYSTEM32;C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7601.17514_none_fa396087175ac9ac;C:\Users\Vityu\.jdks\openjdk-15.0.1\bin\server
+
+VM Arguments:
+jvm_args: --module-path=C:/Program Files/Java/javafx-sdk-11.0.2/lib --add-modules=javafx.controls,javafx.fxml --add-modules=javafx.base,javafx.graphics --add-reads=javafx.base=ALL-UNNAMED --add-reads=javafx.graphics=ALL-UNNAMED -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA 2020.1.4\lib\idea_rt.jar=53789:C:\Program Files\JetBrains\IntelliJ IDEA 2020.1.4\bin -Dfile.encoding=UTF-8 
+java_command: bau.kokany.MainApp
+java_class_path (initial): D:\prog\java\Kokany\target\classes;C:\Program Files\Java\javafx-sdk-11.0.2\lib\src.zip;C:\Program Files\Java\javafx-sdk-11.0.2\lib\javafx-swt.jar;C:\Program Files\Java\javafx-sdk-11.0.2\lib\javafx.web.jar;C:\Program Files\Java\javafx-sdk-11.0.2\lib\javafx.base.jar;C:\Program Files\Java\javafx-sdk-11.0.2\lib\javafx.fxml.jar;C:\Program Files\Java\javafx-sdk-11.0.2\lib\javafx.media.jar;C:\Program Files\Java\javafx-sdk-11.0.2\lib\javafx.swing.jar;C:\Program Files\Java\javafx-sdk-11.0.2\lib\javafx.controls.jar;C:\Program Files\Java\javafx-sdk-11.0.2\lib\javafx.graphics.jar;C:\Users\Vityu\.m2\repository\org\hibernate\hibernate-entitymanager\5.4.4.Final\hibernate-entitymanager-5.4.4.Final.jar;C:\Users\Vityu\.m2\repository\org\jboss\logging\jboss-logging\3.3.2.Final\jboss-logging-3.3.2.Final.jar;C:\Users\Vityu\.m2\repository\org\hibernate\hibernate-core\5.4.4.Final\hibernate-core-5.4.4.Final.jar;C:\Users\Vityu\.m2\repository\org\javassist\javassist\3.24.0-GA\javassist-3.24.0-GA.jar;C:\Users\Vityu\.m2\repository\antlr\antlr\2.7.7\antlr-2.7.7.jar;C:\Users\Vityu\.m2\repository\org\jboss\jandex\2.0.5.Final\jandex-2.0.5.Final.jar;C:\Users\Vityu\.m2\repository\com\fasterxml\classmate\1.3.4\classmate-1.3.4.jar;C:\Users\Vityu\.m2\repository\javax\activation\javax.activation-api\1.2.0\javax.activation-api-1.2.0.jar;C:\Users\Vityu\.m2\repository\javax\xml\bind\jaxb-api\2.3.1\jaxb-api-2.3.1.jar;C:\Users\Vityu\.m2\repository\org\glassfish\jaxb\jaxb-runtime\2.3.1\jaxb-runtime-2.3.1.jar;C:\Users\Vityu\.m2\repository\org\glassfish\jaxb\txw2\2.3.1\txw2-2.3.1.jar;C:\Users\Vityu\.m2\repository\com\sun\istack\istack-commons-runtime\3.0.7\istack-commons-runtime-3.0.7.jar;C:\Users\Vityu\.m2\repository\org\jvnet\staxex\stax-ex\1.8\stax-ex-1.8.jar;C:\Users\Vityu\.m2\repository\com\sun\xml\fastinfoset\FastInfoset\1.2.15\FastInfoset-1.2.15.jar;C:\Users\Vityu\.m2\repository\org\dom4j\dom4j\2.1.1\dom4j-2.1.1.jar;C:\Users\Vityu\.m2\repository\org\hibernate\common\hibernate
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 2                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 1                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 2                                         {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 1048576                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 67108864                                  {product} {ergonomic}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 1073741824                                {product} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 1048576                                   {product} {ergonomic}
+   size_t MinHeapSize                              = 8388608                                   {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 5826188                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122916026                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122916026                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+   size_t SoftMaxHeapSize                          = 1073741824                             {manageable} {ergonomic}
+     bool UseCompressedClassPointers               = true                                 {lp64_product} {ergonomic}
+     bool UseCompressedOops                        = true                                 {lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags
+ #1: stderr all=off uptime,level,tags
+
+Environment Variables:
+JAVA_HOME=c:\Program Files\Java\jdk-11.0.9\
+PATH=C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\dotnet\;C:\Program Files\MATLAB\R2019b\bin;C:\Program Files\PuTTY\;C:\Program Files\Git\cmd;C:\MinGW\bin\;C:\Users\Vityu\.dotnet\tools;C:\Users\Vityu\AppData\Local\GitHubDesktop\bin
+USERNAME=Vityu
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=AMD64 Family 15 Model 67 Stepping 3, AuthenticAMD
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS:
+ Windows 7 , 64 bit Build 7601 (6.1.7601.18847)
+OS uptime: 0 days 10:05 hours
+
+CPU: total 2 (initial active 2) (2 cores per cpu, 1 threads per core) family 15 model 67 stepping 3 microcode 0x0, cmov, cx8, fxsr, mmx, sse, sse2, sse3, 3dnowpref, tsc, clflush
+
+Memory: 4k page, system-wide physical 4094M (312M free)
+TotalPageFile size 4092M (AvailPageFile size 41M)
+current process WorkingSet (physical memory assigned to process): 9M, peak: 9M
+current process commit charge ("private bytes"): 52M, peak: 114M
+
+vm_info: OpenJDK 64-Bit Server VM (15.0.1+9-18) for windows-amd64 JRE (15.0.1+9-18), built on Sep 15 2020 14:39:31 by "mach5one" with unknown MS VC++:1925
+
+END.
