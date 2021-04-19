@@ -19,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 
 public class FXMLController implements Initializable {
 
+    //Főoldal
     @FXML
     private AnchorPane main_page;
 
@@ -38,8 +39,34 @@ public class FXMLController implements Initializable {
     private Label adminpwdLabel;
 
     @FXML
-    private AnchorPane customer_page;
+    void adminButtonClicked(ActionEvent event) {
+        adminpwd.setVisible(true);
+    }
 
+    @FXML
+    void customerbuttonPushed(ActionEvent event) {
+        main_page.setVisible(false);
+        customer_page.setVisible(true);
+    }
+
+    @FXML
+    void expertbuttonPushed(ActionEvent event) {
+        main_page.setVisible(false);
+        expert_page.setVisible(true);
+    }
+
+    @FXML
+    void pwdPassed(ActionEvent event) {
+        if(!adminpwd.getText().equals("admin")) {
+            adminpwdLabel.setVisible(true);
+            adminpwd.clear();
+        }
+        else {
+            adminpwdLabel.setVisible(false);
+        }
+    }
+
+    //Szakember oldal
     @FXML
     private AnchorPane expert_page;
 
@@ -47,19 +74,46 @@ public class FXMLController implements Initializable {
     private Button prev_button1;
 
     @FXML
-    private Button prev_button;
+    private TextField nameText;
 
     @FXML
-    private Button newExpertButton;
+    private TextField professionText;
 
     @FXML
     private ChoiceBox<StatusType> StatusCheckBox = new ChoiceBox<>();
 
     @FXML
-    private TextField nameText;
+    private Button newExpertButton;
+
+
 
     @FXML
-    private TextField professionText;
+    void newExpertButtonPushed(ActionEvent event) throws Exception {
+        Expert expert = new Expert();
+        expert.setName(nameText.getText());
+        expert.setProfession(professionText.getText());
+        expert.setStatus(StatusCheckBox.getValue());
+
+        try(ExpertDAO eDAO = new JPAExpertDAO();) {
+            eDAO.saveExpert(expert);
+        }
+        Alert expertAlert = new Alert(Alert.AlertType.INFORMATION);
+        expert_page.setOpacity(0.4);
+        expertAlert.setTitle("Mentés");
+        expertAlert.setHeaderText("Alábbi adatok kerültek mentésre: ");
+        expertAlert.setContentText("Név:\t" + nameText.getText() + "\nFoglalkozás:\t"+ professionText.getText() + "\nStátusz:\t" + StatusCheckBox.getValue());
+        expertAlert.showAndWait();
+        expert_page.setOpacity(1);
+        //System.out.println("Sikeres mentés!");
+    }
+
+
+    //Ügyfél oldal
+    @FXML
+    private AnchorPane customer_page;
+
+    @FXML
+    private Button prev_button;
 
     @FXML
     private TableView<Expert> lista;
@@ -79,38 +133,7 @@ public class FXMLController implements Initializable {
     private Button ListExpertButton;
 
     @FXML
-    void adminButtonClicked(ActionEvent event) {
-        adminpwd.setVisible(true);
-    }
-
-    @FXML
-    void customerbuttonPushed(ActionEvent event) {
-        main_page.setVisible(false);
-        customer_page.setVisible(true);
-    }
-
-    @FXML
-    void expertbuttonPushed(ActionEvent event) {
-        main_page.setVisible(false);
-        expert_page.setVisible(true);
-    }
-
-    @FXML
-    void newExpertButtonPushed(ActionEvent event) throws Exception {
-        Expert expert = new Expert();
-        expert.setName(nameText.getText());
-        expert.setProfession(professionText.getText());
-        expert.setStatus(StatusCheckBox.getValue());
-
-        try(ExpertDAO eDAO = new JPAExpertDAO();) {
-            eDAO.saveExpert(expert);
-        }
-        System.out.println("Sikeres mentés!");
-    }
-
-    @FXML
     void ListExpertButtonPushed(ActionEvent event) throws Exception {
-
         try(ExpertDAO eDAO = new JPAExpertDAO();) {
             List<Expert> expertList = eDAO.getExperts();
             for(Expert e : expertList) {
@@ -128,22 +151,14 @@ public class FXMLController implements Initializable {
         main_page.setVisible(true);
     }
 
-    @FXML
-    void pwdPassed(ActionEvent event) {
-        if(!adminpwd.getText().equals("admin")) {
-            adminpwdLabel.setVisible(true);
-            adminpwd.clear();
-        }
-        else {
-            adminpwdLabel.setVisible(false);
-        }
-    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        //Szakember oldal státusz választó
         StatusCheckBox.getItems().add(StatusType.ELFOGLALT);
         StatusCheckBox.getItems().add(StatusType.SZABAD);
 
+        //Ügyfél oldal listázás
         lista_name.setCellValueFactory(new PropertyValueFactory<Expert, String>("name"));
         lista_proffession.setCellValueFactory(new PropertyValueFactory<Expert, String>("profession"));
         lista_status.setCellValueFactory(new PropertyValueFactory<Expert, String>("status"));
