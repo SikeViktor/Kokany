@@ -15,7 +15,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bau.kokany.controller.FXMLController">
     <children>
-      <AnchorPane fx:id="main_page" layoutY="-2.0" prefHeight="484.0" prefWidth="644.0" style="-fx-background-color: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);;" visible="false" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="-2.0">
+      <AnchorPane fx:id="main_page" layoutY="-2.0" prefHeight="484.0" prefWidth="644.0" style="-fx-background-color: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);;" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="-2.0">
          <children>
               <Button fx:id="customer_button" layoutX="463.0" layoutY="83.0" mnemonicParsing="false" onAction="#customerbuttonPushed" style="-fx-background-color: radial-gradient(circle, #a8eb12, #00bf72, #008793, #004d7a, #051937);;" text="Belépés &#10;Ügyfélként" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="463.0" AnchorPane.topAnchor="83.0">
                   <font>
@@ -72,7 +72,7 @@
                   <Font name="Times New Roman" size="28.0" />
                </font>
             </Label>
-            <Button fx:id="prev_button" layoutX="293.0" layoutY="380.0" mnemonicParsing="false" onAction="#prevbuttonPushed" prefHeight="36.0" prefWidth="54.0" style="-fx-background-color: white; -fx-background-radius: 15;" text="Vissza">
+            <Button fx:id="prev_button" layoutX="585.0" layoutY="-4.0" mnemonicParsing="false" onAction="#prevbuttonPushed" prefHeight="36.0" prefWidth="54.0" style="-fx-background-color: white; -fx-background-radius: 15;" text="Vissza">
                <font>
                   <Font name="Times New Roman" size="12.0" />
                </font></Button>
@@ -88,14 +88,14 @@
                </columns></TableView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="expert_page" prefHeight="480.0" prefWidth="640.0" style="-fx-background-color: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="expert_page" layoutY="-2.0" prefHeight="480.0" prefWidth="640.0" style="-fx-background-color: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);;" visible="false" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
          <children>
-            <Label alignment="CENTER" layoutX="100.0" layoutY="66.0" text="Szakember oldal" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+            <Label alignment="CENTER" layoutX="94.0" layoutY="25.0" text="Szakember oldal" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="94.0" AnchorPane.rightAnchor="106.0">
                <font>
-                  <Font name="Times New Roman" size="28.0" />
+                  <Font size="20.0" />
                </font>
             </Label>
-            <Button fx:id="prev_button1" layoutX="286.0" layoutY="353.0" mnemonicParsing="false" onAction="#prevbuttonPushed" prefHeight="36.0" prefWidth="54.0" style="-fx-background-color: white; -fx-background-radius: 15;" text="Vissza">
+            <Button fx:id="prev_button1" layoutX="585.0" layoutY="-4.0" mnemonicParsing="false" onAction="#prevbuttonPushed" prefHeight="36.0" prefWidth="54.0" style="-fx-background-color: white; -fx-background-radius: 15;" text="Vissza">
                <font>
                   <Font name="Times New Roman" size="12.0" />
                </font>
