@@ -108,8 +108,15 @@ public class FXMLController implements Initializable {
     private TableColumn<Expert, String> lista_status1;
 
     @FXML
-    void admin_delete_buttonPushed(ActionEvent event) {
-        
+    void admin_delete_buttonPushed(ActionEvent event) throws Exception {
+        Expert selectedItem = lista1.getSelectionModel().getSelectedItem();
+
+        try(ExpertDAO eDAO = new JPAExpertDAO();) {
+            eDAO.deleteExpert(selectedItem);
+            lista1.getItems().remove(selectedItem);
+        }
+
+
     }
 
     @FXML
