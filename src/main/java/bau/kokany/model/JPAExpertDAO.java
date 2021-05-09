@@ -21,7 +21,7 @@ public class JPAExpertDAO implements ExpertDAO {
     @Override
     public void deleteExpert(Expert e) {
         entityManager.getTransaction().begin();
-        entityManager.remove(e);
+        entityManager.remove(entityManager.contains(e) ? e : entityManager.merge(e));
         entityManager.getTransaction().commit();
     }
 
