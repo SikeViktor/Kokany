@@ -56,14 +56,70 @@ public class FXMLController implements Initializable {
     }
 
     @FXML
-    void pwdPassed(ActionEvent event) {
+    void pwdPassed(ActionEvent event) throws Exception {
         if(!adminpwd.getText().equals("admin")) {
             adminpwdLabel.setVisible(true);
             adminpwd.clear();
         }
         else {
+            adminpwd.clear();
+            adminpwd.setVisible(false);
             adminpwdLabel.setVisible(false);
+            main_page.setVisible(false);
+            admin_page.setVisible(true);
+
+            try(ExpertDAO eDAO = new JPAExpertDAO();) {
+                List<Expert> expertList = eDAO.getExperts();
+                for(Expert e : expertList) {
+                    if(row.size() < expertList.size()) {
+                        row.add(e);
+                    }
+                }
+            }
         }
+    }
+
+    //Admin oldal
+    @FXML
+    private AnchorPane admin_page;
+
+    @FXML
+    private Button prev_button2;
+
+    @FXML
+    private Button admin_new_button;
+
+    @FXML
+    private Button admin_modify_button;
+
+    @FXML
+    private Button admin_delete_button;
+
+    @FXML
+    private TableView<Expert> lista1;
+
+    @FXML
+    private TableColumn<Expert, String> lista_name1;
+
+    @FXML
+    private TableColumn<Expert, String> lista_proffession1;
+
+    @FXML
+    private TableColumn<Expert, String> lista_status1;
+
+    @FXML
+    void admin_delete_buttonPushed(ActionEvent event) {
+        
+    }
+
+    @FXML
+    void admin_modify_buttonPushed(ActionEvent event) {
+
+    }
+
+    @FXML
+    void admin_new_buttonPushed(ActionEvent event) {
+
     }
 
     //Szakember oldal
@@ -148,6 +204,7 @@ public class FXMLController implements Initializable {
     void prevbuttonPushed(ActionEvent event) {
         customer_page.setVisible(false);
         expert_page.setVisible(false);
+        admin_page.setVisible(false);
         main_page.setVisible(true);
     }
 
@@ -163,5 +220,11 @@ public class FXMLController implements Initializable {
         lista_proffession.setCellValueFactory(new PropertyValueFactory<Expert, String>("profession"));
         lista_status.setCellValueFactory(new PropertyValueFactory<Expert, String>("status"));
         lista.setItems(row);
+
+        //Admin oldal listázás
+        lista_name1.setCellValueFactory(new PropertyValueFactory<Expert, String>("name"));
+        lista_proffession1.setCellValueFactory(new PropertyValueFactory<Expert, String>("profession"));
+        lista_status1.setCellValueFactory(new PropertyValueFactory<Expert, String>("status"));
+        lista1.setItems(row);
     }
 }
