@@ -2,6 +2,7 @@ package bau.kokany.controller;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import bau.kokany.model.Expert;
@@ -16,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+
 
 public class FXMLController implements Initializable {
 
@@ -56,15 +58,16 @@ public class FXMLController implements Initializable {
     }
 
     @FXML
-    void pwdPassed(ActionEvent event) throws Exception {
+    void pwdPassed(ActionEvent event) {
         if(!adminpwd.getText().equals("admin")) {
             adminpwdLabel.setVisible(true);
             adminpwd.clear();
         }
         else {
-            adminpwd.clear();
-            adminpwd.setVisible(false);
             adminpwdLabel.setVisible(false);
+
+        }
+
             main_page.setVisible(false);
             admin_page.setVisible(true);
 
@@ -75,9 +78,11 @@ public class FXMLController implements Initializable {
                         row.add(e);
                     }
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        }
     }
+
 
     //Admin oldal
     @FXML
@@ -111,11 +116,20 @@ public class FXMLController implements Initializable {
     void admin_delete_buttonPushed(ActionEvent event) throws Exception {
         Expert selectedItem = lista1.getSelectionModel().getSelectedItem();
 
-        try(ExpertDAO eDAO = new JPAExpertDAO();) {
-            eDAO.deleteExpert(selectedItem);
-            lista1.getItems().remove(selectedItem);
-        }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Jóváhagyás");
+        alert.setHeaderText("Törölni akarod a szakembert.");
+        alert.setContentText("Biztosan törlöd?");
 
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            try(ExpertDAO eDAO = new JPAExpertDAO();) {
+                eDAO.deleteExpert(selectedItem);
+                lista1.getItems().remove(selectedItem);
+            }
+        } else {
+
+        }
 
     }
 
@@ -126,6 +140,9 @@ public class FXMLController implements Initializable {
 
     @FXML
     void admin_new_buttonPushed(ActionEvent event) {
+        /*Dialog<Triplet<String, String, StatusType>> dialog = new Dialog<>();
+        dialog.setTitle("Login Dialog");
+        dialog.setHeaderText("Look, a Custom Login Dialog");*/
 
     }
 
@@ -211,7 +228,6 @@ public class FXMLController implements Initializable {
     void prevbuttonPushed(ActionEvent event) {
         customer_page.setVisible(false);
         expert_page.setVisible(false);
-        admin_page.setVisible(false);
         main_page.setVisible(true);
     }
 
@@ -227,11 +243,5 @@ public class FXMLController implements Initializable {
         lista_proffession.setCellValueFactory(new PropertyValueFactory<Expert, String>("profession"));
         lista_status.setCellValueFactory(new PropertyValueFactory<Expert, String>("status"));
         lista.setItems(row);
-
-        //Admin oldal listázás
-        lista_name1.setCellValueFactory(new PropertyValueFactory<Expert, String>("name"));
-        lista_proffession1.setCellValueFactory(new PropertyValueFactory<Expert, String>("profession"));
-        lista_status1.setCellValueFactory(new PropertyValueFactory<Expert, String>("status"));
-        lista1.setItems(row);
     }
 }
