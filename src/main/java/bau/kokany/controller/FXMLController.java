@@ -1,10 +1,7 @@
 package bau.kokany.controller;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import bau.kokany.model.Expert;
 import bau.kokany.model.ExpertDAO;
@@ -140,8 +137,47 @@ public class FXMLController implements Initializable {
     }
 
     @FXML
-    void admin_modify_buttonPushed(ActionEvent event) {
+    void admin_modify_buttonPushed(ActionEvent event) throws Exception {
+        Expert selectedItem = lista1.getSelectionModel().getSelectedItem();
+        Dialog<Expert> dialog = new Dialog<>();
+        dialog.setTitle("Szakember Adatainak Módosítása");
+        dialog.setHeaderText(null);
+        DialogPane dialogPane = dialog.getDialogPane();
+        dialogPane.getButtonTypes().addAll(ButtonType.OK);
+        TextField expert_name = new TextField(selectedItem.getName());
+        TextField expert_prof= new TextField(selectedItem.getProfession());
+        ObservableList<StatusType> options =
+                FXCollections.observableArrayList(StatusType.values());
+        ComboBox<StatusType> comboBox = new ComboBox<>(options);
+        comboBox.getSelectionModel().select(selectedItem.getStatus());
+        dialogPane.setContent(new VBox(8, expert_name, expert_prof, comboBox));
+        Platform.runLater(expert_name::requestFocus);
+        try(ExpertDAO eDAO = new JPAExpertDAO();) {
+            dialog.setResultConverter((ButtonType button) -> {
+                if (button == ButtonType.OK) {
+                    for(Expert e : eDAO.getExperts()) {
+                        if(Objects.equals(selectedItem.getName(), e.getName()) && Objects.equals(selectedItem.getProfession(), e.getProfession())) {
+                            e.setName(expert_name.getText());
+                            e.setProfession(expert_prof.getText());
+                            e.setStatus(comboBox.getValue());
+                            eDAO.updateExpert(e);
+                        }
 
+                    }
+
+                    selectedItem.setName(expert_name.getText());
+                    selectedItem.setProfession(expert_prof.getText());
+                    selectedItem.setStatus(comboBox.getValue());
+
+                }
+                return selectedItem;
+
+            });
+            Optional<Expert> optionalResult = dialog.showAndWait();
+            optionalResult.ifPresent((Expert results) -> {
+                lista1.refresh();
+            });
+        }
     }
 
     @FXML
@@ -214,6 +250,7 @@ public class FXMLController implements Initializable {
 
         try(ExpertDAO eDAO = new JPAExpertDAO();) {
             eDAO.saveExpert(expert);
+            lista.getItems().add(expert);
         }
         Alert expertAlert = new Alert(Alert.AlertType.INFORMATION);
         expert_page.setOpacity(0.4);
