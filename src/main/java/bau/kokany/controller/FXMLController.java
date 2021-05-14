@@ -367,6 +367,7 @@ public class FXMLController implements Initializable {
     @FXML
     void ListExpertButtonPushed(ActionEvent event) throws Exception {
         refresh();
+        lista.refresh();
     }
 
     @FXML
