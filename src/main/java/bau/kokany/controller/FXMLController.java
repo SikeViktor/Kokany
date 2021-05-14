@@ -2,6 +2,7 @@ package bau.kokany.controller;
 
 import java.net.URL;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import bau.kokany.model.Expert;
 import bau.kokany.model.ExpertDAO;
@@ -14,13 +15,21 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Pair;
 
 public class FXMLController implements Initializable {
+
+    Map<String, String> ugyfelek=Map.of(
+            "Gyuszi", "hgy",
+            "Boti", "dmd",
+            "Dávid", "md",
+            "Vityu", "sv");
 
     void refresh() throws Exception {
         row.removeAll();
@@ -60,8 +69,78 @@ public class FXMLController implements Initializable {
 
     @FXML
     void customerbuttonPushed(ActionEvent event) {
-        main_page.setVisible(false);
-        customer_page.setVisible(true);
+        AtomicBoolean belepve= new AtomicBoolean(false);
+        Dialog<Pair<String, String>> dialog = new Dialog<>();
+        dialog.setTitle("Login Dialog");
+        dialog.setHeaderText("Look, a Custom Login Dialog");
+
+        // Set the button types.
+        ButtonType loginButtonType = new ButtonType("Login", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
+
+        // Create the username and password labels and fields.
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20, 150, 10, 10));
+
+        TextField username = new TextField();
+        PasswordField password = new PasswordField();
+
+        grid.add(new Label("Felhasználónév:"), 0, 0);
+        grid.add(username, 1, 0);
+        grid.add(new Label("Jelszó:"), 0, 1);
+        grid.add(password, 1, 1);
+
+        // Enable/Disable login button depending on whether a username was entered.
+        Node loginButton = dialog.getDialogPane().lookupButton(loginButtonType);
+        loginButton.setDisable(true);
+
+        // Do some validation (using the Java 8 lambda syntax).
+        username.textProperty().addListener((observable, oldValue, newValue) -> {
+            loginButton.setDisable(newValue.trim().isEmpty());
+        });
+
+        dialog.getDialogPane().setContent(grid);
+
+        // Request focus on the username field by default.
+        Platform.runLater(() -> username.requestFocus());
+
+        // Convert the result to a username-password-pair when the login button is clicked.
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == loginButtonType) {
+                return new Pair<>(username.getText(), password.getText());
+            }
+            return null;
+        });
+
+        Optional<Pair<String, String>> result = dialog.showAndWait();
+
+        result.ifPresent(usernamePassword -> {
+            for(Map.Entry<String, String> par : ugyfelek.entrySet()) {
+                if (Objects.equals(usernamePassword.getKey(), par.getKey()) && Objects.equals(usernamePassword.getValue(), par.getValue())) {
+                    belepve.set(true);
+                    break;
+                } else {
+                    belepve.set(false);
+                }
+            }
+        });
+
+        if(belepve.get()) {
+            main_page.setVisible(false);
+            customer_page.setVisible(true);
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Hiba");
+            alert.setHeaderText(null);
+            alert.setContentText("Hibás bejelentkezési adatok!");
+
+            alert.showAndWait();
+        }
+
+
     }
 
     @FXML
