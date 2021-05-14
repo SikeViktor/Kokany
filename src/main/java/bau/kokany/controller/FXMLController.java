@@ -27,7 +27,7 @@ public class FXMLController implements Initializable {
 
     Map<String, String> ugyfelek=Map.of(
             "Gyuszi", "hgy",
-            "Boti", "dmd",
+            "Boti", "dmb",
             "Dávid", "md",
             "Vityu", "sv");
 
