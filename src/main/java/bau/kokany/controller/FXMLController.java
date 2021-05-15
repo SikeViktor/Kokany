@@ -71,8 +71,8 @@ public class FXMLController implements Initializable {
     void customerbuttonPushed(ActionEvent event) {
         AtomicBoolean belepve= new AtomicBoolean(false);
         Dialog<Pair<String, String>> dialog = new Dialog<>();
-        dialog.setTitle("Login Dialog");
-        dialog.setHeaderText("Look, a Custom Login Dialog");
+        dialog.setTitle("Bejelentkezés");
+        dialog.setHeaderText(null);
 
         // Set the button types.
         ButtonType loginButtonType = new ButtonType("Login", ButtonBar.ButtonData.OK_DONE);
