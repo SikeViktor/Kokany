@@ -37,6 +37,8 @@ public class MainApp extends Application {
 
     private static void stopDatabase() {
         s.shutdown();
+        //biztos ami biztos
+
     }
 
     private static void startDatabase() throws SQLException {
